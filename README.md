@@ -1,5 +1,5 @@
 # Special Project
 
-Step 1: https://github.com/darrenanggayla/specialproject.git \n
-Step 2: Look for main.py and run the code
-
+**Step 1**: git clone https://github.com/darrenanggayla/specialproject.git <br/>
+**Step 2**: Download Ollama & run any AI model <br/>
+**Step 3**: Run main.py

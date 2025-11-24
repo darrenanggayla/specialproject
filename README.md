@@ -1,3 +1,4 @@
-#Special Project
+# Special Project
 
-To run this code, you need to 
+Step 1: https://github.com/darrenanggayla/specialproject.git
+Step 2: Look for main.py and run the code

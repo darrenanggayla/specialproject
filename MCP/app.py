@@ -9,9 +9,9 @@ from clients.ollama_client import OllamaMCPClient
 # --- Configuration ---
 # Use absolute paths to avoid directory issues
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-OLLAMA_CLIENT_DIR = os.path.join(ROOT_DIR, "ollama-mcp-client")
-SERVER_DIR = os.path.join(OLLAMA_CLIENT_DIR, "server")
-SERVER_CONFIG_PATH = os.path.join(OLLAMA_CLIENT_DIR, "examples", "server.json")
+# app.py is inside ollama-mcp-client, so ROOT_DIR is the base for server/ and examples/
+SERVER_DIR = os.path.join(ROOT_DIR, "server")
+SERVER_CONFIG_PATH = os.path.join(ROOT_DIR, "examples", "server.json")
 DB_PATH = os.path.join(SERVER_DIR, "data.db")
 
 # --- Flask App Initialization ---

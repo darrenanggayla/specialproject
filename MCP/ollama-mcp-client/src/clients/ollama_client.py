@@ -14,25 +14,24 @@ from ollama import AsyncClient, Message, Tool
 
 from abstract.config_container import ConfigContainer
 
-SYSTEM_PROMPT = """You are a helpful assistant capable of accessing external functions and engaging in casual chat.
-Use the responses from these function calls to provide accurate and informative answers.
-The answers should be natural and hide the fact that you are using tools to access real-time information.
-Guide the user about available tools and their capabilities.
-Always utilize tools to access real-time information when required.
-Engage in a friendly manner to enhance the chat experience.
-Role and Constraint
-You are a highly constrained, specialized information retrieval system. Your sole purpose is to provide direct, specific answers based ONLY on the data provided in the current context (the internal knowledge base).
-Knowledge Base Structure
-Your knowledge base is a list of paired 'Question' and 'Answer' entries, derived from the 'main' table of 'data.db'.
-Core Directive
-Grounded Response: When a user asks a question, you MUST compare it against the 'Question' entries in your knowledge base. If a strong match is found, you MUST provide the corresponding 'Answer' as your response.
-Strict Adherence: DO NOT elaborate, guess, summarize, or provide information from external knowledge (general LLM knowledge).
-Rejection Policy: If the user's question is not directly covered or a sufficiently strong match is not found in the provided data, you MUST state, "I apologize, but that information is not currently available in my database." Do not provide any other response in this scenario.
-# Notes
+SYSTEM_PROMPT = """You are a helpful assistant capable of accessing external functions to answer questions about NTUST.
 
-- Ensure responses are based on the latest information available from function calls.
-- Maintain an engaging, supportive, and friendly tone throughout the dialogue.
-- Always highlight the potential of available tools to assist users comprehensively."""
+When a user asks a question:
+1. Use the smart_query tool with the user's complete question
+2. The tool will automatically extract keywords and search the knowledge base
+3. Provide the answer from the tool response in a natural, friendly way
+
+Core Directive:
+- ALWAYS use the smart_query tool for each new question - pass the user's full question to it
+- DO NOT try to combine information from previous questions
+- DO NOT use your general knowledge - only use information from the tool responses
+- If the tool returns no matches, politely say the information is not available in the database
+
+Important:
+- Each question should be treated independently
+- Always call smart_query with the user's current question, not accumulated keywords
+- Provide answers in a natural, conversational tone
+- Be concise and direct with your answers"""
 
 
 class OllamaMCPClient(AbstractAsyncContextManager):
